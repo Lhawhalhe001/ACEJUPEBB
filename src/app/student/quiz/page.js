@@ -248,7 +248,7 @@ export default function QuizPage() {
                       background: "white",
                       cursor: "pointer",
                       transition: "0.2s ease",
-                      color: " #cbd5e1"
+                      color: " #206cc9ff"
                     }}
                   >
                     {opt}
