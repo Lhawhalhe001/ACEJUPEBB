@@ -1,0 +1,106 @@
+/* src/app/page.css */
+/* 🌟 General Page Styling */
+/* 🟧 MANUAL PAYMENT SECTION */
+/* 🟧 MANUAL PAYMENT SECTION */
+.manual-payment {
+  margin-top: 80px;
+  background: linear-gradient(180deg, #e8f0ff 0%, #f8fbff 100%);
+  border-radius: 20px;
+  padding: 60px 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.08);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.manual-payment h2 {
+  color: #1e40af;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+.manual-payment p {
+  color: #374151;
+  font-size: 17px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* Payment Details Box */
+.payment-box {
+  background: #ffffffcc;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.1);
+  transition: all 0.3s ease;
+}
+
+.payment-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(30, 64, 175, 0.15);
+}
+
+.payment-box h3 {
+  color: #1e40af;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.payment-box ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  color: #1f2a44;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.payment-box li {
+  margin-bottom: 8px;
+}
+
+.upload-note {
+  margin-top: 30px;
+}
+
+.upload-note p {
+  font-size: 15px;
+  color: #374151;
+  background: #f0f6ff;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.upload-note button {
+  background: #1e40af;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-note button:hover {
+  background: #3a86ff;
+}
+
+/* Smooth fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .manual-payment {
+    padding: 40px 20px;
+  }
+  .payment-box {
+    padding: 24px;
+  }
+}

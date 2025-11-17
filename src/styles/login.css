@@ -1,0 +1,117 @@
+/* src/styles/login.css */
+/* 🌟 LOGIN PAGE CONTAINER */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fbff 0%, #e8f0ff 100%);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🌟 LOGIN CARD */
+.login-card {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 36px 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.15);
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+/* Subtle hover lift for interactivity */
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.2);
+}
+
+/* 🌟 HEADER TEXT */
+.login-card h2 {
+  color: #1e40af;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* 🌟 FORM LABELS */
+.login-card label {
+  display: block;
+  text-align: left;
+  margin-top: 16px;
+  font-weight: 600;
+  color: #1f2a44;
+  font-size: 15px;
+}
+
+/* 🌟 INPUT FIELDS */
+.login-card input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.8px solid #cbd5e1;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.login-card input:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* 🌟 LOGIN BUTTON */
+.login-card button {
+  margin-top: 24px;
+  width: 100%;
+  background-color: #1e40af;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-card button:hover {
+  background-color: #2563eb;
+  transform: scale(1.03);
+}
+
+/* 🌟 SWITCH LINK (Student/Admin Toggle) */
+.switch-text {
+  margin-top: 20px;
+  font-size: 15px;
+  color: #374151;
+}
+
+.switch-link {
+  color: #1e40af;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: color 0.3s ease;
+}
+
+.switch-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* 🌟 Responsive Design */
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    padding: 28px 20px;
+  }
+  .login-card h2 {
+    font-size: 26px;
+  }
+}
