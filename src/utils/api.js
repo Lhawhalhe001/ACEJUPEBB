@@ -47,7 +47,7 @@
 // Reusable API helper functions for your frontend ↔ backend communication.
 
 // ✅ Base URL (use your backend port or deployed URL)
-export const BASE_URL = "http://localhost:5000/api";
+export const BASE_URL = "https://ace-jupeb.onrender.com/api";
 
 // -------------------------------
 // GET Request Helper

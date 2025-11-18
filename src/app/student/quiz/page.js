@@ -138,7 +138,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../components/Navbar";
 import "../../../styles/student.css";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://ace-jupeb.onrender.com/api";
 
 export default function QuizPage() {
   const [subject, setSubject] = useState("Biology");

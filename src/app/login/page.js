@@ -102,7 +102,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const BASE_URL = "http://localhost:5000/api";
+    const BASE_URL = "https://ace-jupeb.onrender.com/api";
     const endpoint = isAdmin ? `admin/login` : `student/login`;
 
     const res = await postData(endpoint, { name, uniqueCode });
