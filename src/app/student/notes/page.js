@@ -84,6 +84,11 @@ export default function NotesPage() {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Map English → Biology
+  const subjectMap = {
+    English: "Biology",
+  };
+
   useEffect(() => {
     async function loadNotes() {
       try {
@@ -95,10 +100,11 @@ export default function NotesPage() {
           throw new Error("Invalid data format received from backend");
         }
 
-        // Group notes by subject
+        // Group notes by REAL subjects
         const grouped = res.notes.reduce((acc, note) => {
-          if (!acc[note.subject]) acc[note.subject] = [];
-          acc[note.subject].push(note);
+          const realSubj = note.subject;
+          if (!acc[realSubj]) acc[realSubj] = [];
+          acc[realSubj].push(note);
           return acc;
         }, {});
 
@@ -117,12 +123,20 @@ export default function NotesPage() {
   if (loading) return <p className="p-4">Loading notes...</p>;
   if (error) return <p className="p-4">{error}</p>;
 
-  const subjects = Object.keys(notes);
+  // Convert English → Biology in UI
+  const subjects = Object.keys(notes).map(
+    (subj) => subjectMap[subj] || subj
+  );
+
+  // Resolve selected subject back to original backend subject
+  const backendSubject = Object.keys(notes).find(
+    (key) => subjectMap[key] === selectedSubject || key === selectedSubject
+  );
 
   // Notes for selected subject
   const filteredNotes =
-    selectedSubject && notes[selectedSubject]
-      ? notes[selectedSubject].filter(
+    backendSubject && notes[backendSubject]
+      ? notes[backendSubject].filter(
           (note) =>
             note.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
             note.body.toLowerCase().includes(searchQuery.toLowerCase())
@@ -131,11 +145,10 @@ export default function NotesPage() {
 
   return (
     <div className="container p-6">
-
       {/* Page Header */}
       <h2 className="text-3xl font-bold mb-6">📘 JUPEB Notes</h2>
 
-      {/* Subject Selector */}
+      {/* Subject Selector Buttons */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {subjects.map((subject) => (
           <button
@@ -173,7 +186,8 @@ export default function NotesPage() {
             placeholder="🔍 Search notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 border rounded-lg shadow-sm mb-4 outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg shadow-sm mb-4 
+            outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       )}
