@@ -80,9 +80,10 @@ export default function NotesPage() {
   const [notes, setNotes] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedSubject, setSelectedSubject] = useState("");
 
-  // Load notes from backend
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     async function loadNotes() {
       try {
@@ -91,7 +92,7 @@ export default function NotesPage() {
         const res = await fetchData("student/notes/allnotes");
 
         if (!res || !Array.isArray(res.notes)) {
-          throw new Error("Invalid data from backend");
+          throw new Error("Invalid data format received from backend");
         }
 
         // Group notes by subject
@@ -102,15 +103,9 @@ export default function NotesPage() {
         }, {});
 
         setNotes(grouped);
-
-        // Auto-select first subject
-        const subjects = Object.keys(grouped);
-        if (subjects.length > 0) {
-          setSelectedSubject(subjects[0]);
-        }
       } catch (err) {
         console.error("Failed to load notes:", err);
-        setError("⚠️ Could not load notes. Please try again.");
+        setError("⚠️ Could not load notes. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -119,59 +114,86 @@ export default function NotesPage() {
     loadNotes();
   }, []);
 
-  if (loading) return <p className="p-6">Loading notes...</p>;
-  if (error) return <p className="p-6 text-red-500">{error}</p>;
+  if (loading) return <p className="p-4">Loading notes...</p>;
+  if (error) return <p className="p-4">{error}</p>;
 
   const subjects = Object.keys(notes);
 
-  return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">📘 JUPEB Notes</h2>
+  // Notes for selected subject
+  const filteredNotes =
+    selectedSubject && notes[selectedSubject]
+      ? notes[selectedSubject].filter(
+          (note) =>
+            note.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            note.body.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
 
-      {/* SUBJECT SELECTOR */}
-      <div className="flex flex-wrap gap-3 mb-6 justify-center">
-        {subjects.map((subj) => (
+  return (
+    <div className="container p-6">
+
+      {/* Page Header */}
+      <h2 className="text-3xl font-bold mb-6">📘 JUPEB Notes</h2>
+
+      {/* Subject Selector */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        {subjects.map((subject) => (
           <button
-            key={subj}
-            onClick={() => setSelectedSubject(subj)}
-            className={`px-4 py-2 rounded-lg font-medium border transition-all duration-200 ${
-              selectedSubject === subj
-                ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
-            }`}
+            key={subject}
+            onClick={() => setSelectedSubject(subject)}
+            className={`p-4 rounded-xl shadow 
+              border transition-all
+              ${
+                selectedSubject === subject
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-blue-50"
+              }`}
           >
-            {subj}
+            {subject}
           </button>
         ))}
       </div>
 
-      {/* NOTES DISPLAY */}
-      <div className="bg-white shadow-lg rounded-xl p-6 border">
-        <h3 className="text-2xl font-semibold mb-4 border-b pb-2">
-          {selectedSubject || "Select a Subject"}
-        </h3>
+      {/* If subject not selected */}
+      {!selectedSubject && (
+        <p className="text-gray-500 text-lg">
+          👉 Select a subject to view notes.
+        </p>
+      )}
 
-        {!selectedSubject || notes[selectedSubject].length === 0 ? (
-          <p>No notes available for this subject.</p>
-        ) : (
-          <div className="space-y-5">
-            {notes[selectedSubject].map((note) => (
-              <div
-                key={note._id}
-                className="p-4 border rounded-lg bg-gray-50 hover:bg-gray-100 transition"
-              >
-                <h4 className="font-bold text-lg text-blue-700">
-                  {note.topic}
-                </h4>
-                <p className="text-gray-700 mt-2 leading-relaxed">
-                  {note.body}
-                </p>
-              </div>
-            ))}
+      {/* Subject Title + Search Bar */}
+      {selectedSubject && (
+        <div className="mb-4">
+          <h3 className="text-2xl font-semibold mb-3">
+            {selectedSubject} Notes
+          </h3>
+
+          <input
+            type="text"
+            placeholder="🔍 Search notes..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-3 border rounded-lg shadow-sm mb-4 outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      )}
+
+      {/* Notes List */}
+      <div className="space-y-4">
+        {filteredNotes.map((note) => (
+          <div
+            key={note._id}
+            className="p-4 border rounded-xl shadow bg-white"
+          >
+            <h4 className="font-semibold text-xl mb-1">{note.topic}</h4>
+            <p className="text-gray-700">{note.body}</p>
           </div>
+        ))}
+
+        {selectedSubject && filteredNotes.length === 0 && (
+          <p className="text-gray-500">No notes found.</p>
         )}
       </div>
     </div>
   );
 }
-
