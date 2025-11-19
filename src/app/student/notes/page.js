@@ -149,7 +149,7 @@ export default function NotesPage() {
       <h2 className="text-3xl font-bold mb-6">📘 JUPEB Notes</h2>
 
       {/* Subject Selector Buttons */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {subjects.map((subject) => (
           <button
             key={subject}
@@ -165,7 +165,36 @@ export default function NotesPage() {
             {subject}
           </button>
         ))}
-      </div>
+      </div> */}
+
+      {/* Subject Selector - Dominant Big UI */}
+<div className="mb-10">
+  <h3 className="text-2xl font-bold mb-4">Select Subject</h3>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {subjects.map((subject) => (
+      <button
+        key={subject}
+        onClick={() => setSelectedSubject(subject)}
+        className={`
+          group 
+          p-8 rounded-2xl shadow-lg border-2 transition-all
+          flex items-center justify-center text-2xl font-semibold
+          ${selectedSubject === subject
+            ? "bg-blue-600 text-white border-blue-700 scale-105 shadow-xl"
+            : "bg-white text-gray-800 border-gray-300 hover:scale-105 hover:shadow-xl hover:border-blue-400"
+          }
+        `}
+      >
+        {/* Animated Highlight */}
+        <span className="group-hover:scale-110 transition-transform duration-300">
+          {subject}
+        </span>
+      </button>
+    ))}
+  </div>
+</div>
+
 
       {/* If subject not selected */}
       {!selectedSubject && (
