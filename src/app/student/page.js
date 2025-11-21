@@ -88,7 +88,7 @@ export default function StudentDashboard() {
             Get tutorials, tips, solved past questions, and weekly live classes.
           </p>
           <a
-            href="YOUR_WHATSAPP_GROUP_LINK_HERE"
+            href="https://chat.whatsapp.com/ENHa6z1xDxAAMsr8AGaXzW"
             target="_blank"
             className="bg-white text-blue-700 px-6 py-3 rounded-xl text-lg font-semibold shadow hover:scale-105 transition inline-block"
           >
@@ -104,7 +104,7 @@ export default function StudentDashboard() {
           </p>
 
           <a
-            href="YOUR_WHATSAPP_PHONE_LINK_HERE"
+            href="https://wa.me/message/GLFS6MHF5LGHP1"
             target="_blank"
             className="bg-green-600 text-white px-6 py-3 rounded-xl text-lg font-semibold shadow hover:scale-105 transition inline-block"
           >

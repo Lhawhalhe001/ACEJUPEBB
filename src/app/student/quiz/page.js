@@ -149,7 +149,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../components/Navbar";
 import "../../../styles/student.css";
 
-const BASE_URL = "https://ace-jupeb.onrender.com/api";
+const BASE_URL = "https://ace-jupeb-production.up.railway.app/api";
 
 export default function QuizPage() {
   const [subject, setSubject] = useState("Biology");

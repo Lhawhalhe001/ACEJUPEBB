@@ -103,7 +103,7 @@ import Navbar from "../../components/Navbar";
 import "../../styles/admin.css";
 
 export default function AdminDashboard() {
-  const BASE_URL = "https://ace-jupeb.onrender.com/api"; // 🔧 change to your backend base URL
+  const BASE_URL = "https://ace-jupeb-production.up.railway.app/api"; // 🔧 change to your backend base URL
   const [message, setMessage] = useState("");
 
   // ------------------ STATES ------------------
