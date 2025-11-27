@@ -93,8 +93,8 @@ export default function LoginPage() {
   const [uniqueCode, setUniqueCode] = useState("");
 
   // Admin fields
-  const [adminUsername, setAdminUsername] = useState("");
-  const [adminPassword, setAdminPassword] = useState("");
+  const [Username, setUsername] = useState("");
+  const [Password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -149,8 +149,8 @@ export default function LoginPage() {
               {/* ADMIN LOGIN FIELDS */}
               <label>Admin Username</label>
               <input
-                value={adminUsername}
-                onChange={(e) => setAdminUsername(e.target.value)}
+                value={Username}
+                onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter admin username"
                 required
               />
@@ -158,8 +158,8 @@ export default function LoginPage() {
               <label>Password</label>
               <input
                 type="password"
-                value={adminPassword}
-                onChange={(e) => setAdminPassword(e.target.value)}
+                value={Password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter admin password"
                 required
               />
